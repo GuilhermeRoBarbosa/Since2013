@@ -7,7 +7,7 @@ namespace ServicosAPI.Models
 {
     public class DisciplinaModels
     {
-        public int codigo { get; set; }
-        public String nome { get; set; }
+        public int DiscCodigo { get; set; }
+        public String DiscNome { get; set; }    
     }
 }

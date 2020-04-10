@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="since2013bdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="alu_cod" />
+          </Key>
+          <Property Name="alu_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="alu_nome" Type="varchar" MaxLength="100" />
+          <Property Name="alu_RA" Type="varchar" MaxLength="50" />
+          <Property Name="alu_telefone" Type="varchar" MaxLength="50" />
+          <Property Name="disc_cod" Type="int" />
+        </EntityType>
+        <EntityType Name="Disciplina">
+          <Key>
+            <PropertyRef Name="disc_cod" />
+          </Key>
+          <Property Name="disc_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="disc_nome" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="mat_cod" />
+          </Key>
+          <Property Name="mat_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="alu_cod" Type="int" />
+          <Property Name="disc_cod" Type="int" />
+          <Property Name="mat_nota1" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="mat_nota2" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="mat_media" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="mat_status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Aluno_Disciplina">
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="0..1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="disc_cod" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="disc_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Aluno">
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="0..1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="alu_cod" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="alu_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Disciplina">
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="0..1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="disc_cod" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="disc_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="since2013bdModelStoreContainer">
+          <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disciplina" EntityType="Self.Disciplina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Aluno_Disciplina" Association="Self.FK_Aluno_Disciplina">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Aluno" Association="Self.FK_Matricula_Aluno">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Disciplina" Association="Self.FK_Matricula_Disciplina">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="since2013bdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="alu_cod" />
+          </Key>
+          <Property Name="alu_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="alu_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alu_RA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="alu_telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="disc_cod" Type="Int32" />
+          <NavigationProperty Name="Disciplina" Relationship="Self.FK_Aluno_Disciplina" FromRole="Aluno" ToRole="Disciplina" />
+          <NavigationProperty Name="Matriculas" Relationship="Self.FK_Matricula_Aluno" FromRole="Aluno" ToRole="Matricula" />
+        </EntityType>
+        <EntityType Name="Disciplina">
+          <Key>
+            <PropertyRef Name="disc_cod" />
+          </Key>
+          <Property Name="disc_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="disc_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alunoes" Relationship="Self.FK_Aluno_Disciplina" FromRole="Disciplina" ToRole="Aluno" />
+          <NavigationProperty Name="Matriculas" Relationship="Self.FK_Matricula_Disciplina" FromRole="Disciplina" ToRole="Matricula" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="mat_cod" />
+          </Key>
+          <Property Name="mat_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="alu_cod" Type="Int32" />
+          <Property Name="disc_cod" Type="Int32" />
+          <Property Name="mat_nota1" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="mat_nota2" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="mat_media" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="mat_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Aluno" Relationship="Self.FK_Matricula_Aluno" FromRole="Matricula" ToRole="Aluno" />
+          <NavigationProperty Name="Disciplina" Relationship="Self.FK_Matricula_Disciplina" FromRole="Matricula" ToRole="Disciplina" />
+        </EntityType>
+        <Association Name="FK_Aluno_Disciplina">
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="0..1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="disc_cod" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="disc_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Aluno">
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="0..1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="alu_cod" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="alu_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Disciplina">
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="0..1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="disc_cod" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="disc_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="since2013bdEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alunoes" EntityType="Self.Aluno" />
+          <EntitySet Name="Disciplinas" EntityType="Self.Disciplina" />
+          <EntitySet Name="Matriculas" EntityType="Self.Matricula" />
+          <AssociationSet Name="FK_Aluno_Disciplina" Association="Self.FK_Aluno_Disciplina">
+            <End Role="Disciplina" EntitySet="Disciplinas" />
+            <End Role="Aluno" EntitySet="Alunoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Aluno" Association="Self.FK_Matricula_Aluno">
+            <End Role="Aluno" EntitySet="Alunoes" />
+            <End Role="Matricula" EntitySet="Matriculas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Disciplina" Association="Self.FK_Matricula_Disciplina">
+            <End Role="Disciplina" EntitySet="Disciplinas" />
+            <End Role="Matricula" EntitySet="Matriculas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="since2013bdModelStoreContainer" CdmEntityContainer="since2013bdEntities">
+          <EntitySetMapping Name="Alunoes">
+            <EntityTypeMapping TypeName="since2013bdModel.Aluno">
+              <MappingFragment StoreEntitySet="Aluno">
+                <ScalarProperty Name="alu_cod" ColumnName="alu_cod" />
+                <ScalarProperty Name="alu_nome" ColumnName="alu_nome" />
+                <ScalarProperty Name="alu_RA" ColumnName="alu_RA" />
+                <ScalarProperty Name="alu_telefone" ColumnName="alu_telefone" />
+                <ScalarProperty Name="disc_cod" ColumnName="disc_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disciplinas">
+            <EntityTypeMapping TypeName="since2013bdModel.Disciplina">
+              <MappingFragment StoreEntitySet="Disciplina">
+                <ScalarProperty Name="disc_cod" ColumnName="disc_cod" />
+                <ScalarProperty Name="disc_nome" ColumnName="disc_nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matriculas">
+            <EntityTypeMapping TypeName="since2013bdModel.Matricula">
+              <MappingFragment StoreEntitySet="Matricula">
+                <ScalarProperty Name="mat_cod" ColumnName="mat_cod" />
+                <ScalarProperty Name="alu_cod" ColumnName="alu_cod" />
+                <ScalarProperty Name="disc_cod" ColumnName="disc_cod" />
+                <ScalarProperty Name="mat_nota1" ColumnName="mat_nota1" />
+                <ScalarProperty Name="mat_nota2" ColumnName="mat_nota2" />
+                <ScalarProperty Name="mat_media" ColumnName="mat_media" />
+                <ScalarProperty Name="mat_status" ColumnName="mat_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
