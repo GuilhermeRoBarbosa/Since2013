@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="799b19f38a5f490889864f44eecf4534" Name="Diagram1">
-        <EntityTypeShape EntityType="since2013bdModel.Aluno" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="since2013bdModel.Disciplina" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="since2013bdModel.Matricula" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="since2013bdModel.FK_Aluno_Disciplina" ManuallyRouted="false" />
-        <AssociationConnector Association="since2013bdModel.FK_Matricula_Aluno" ManuallyRouted="false" />
-        <AssociationConnector Association="since2013bdModel.FK_Matricula_Disciplina" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="since2013bdModel.Aluno" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="since2013bdModel.Disciplina" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="since2013bdModel.Matricula" Width="1.5" PointX="5.25" PointY="1" />
+        <AssociationConnector Association="since2013bdModel.FK_Aluno_Disciplina" />
+        <AssociationConnector Association="since2013bdModel.FK_Matricula_Aluno" />
+        <AssociationConnector Association="since2013bdModel.FK_Matricula_Disciplina" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

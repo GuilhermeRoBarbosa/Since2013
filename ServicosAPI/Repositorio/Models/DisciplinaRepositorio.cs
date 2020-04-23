@@ -5,63 +5,55 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Repositorio.Models
-{  
-    public class AlunoRepositorio
+{
+    public class DisciplinaRepositorio
     {
-        // private static List<Aluno> alunos = new List<Aluno>();
 
-        public void inserir(Aluno obj)
+        public void inserir(Disciplina obj)
         {
             using (since2013bdEntities db =
                 new since2013bdEntities())
             {
-                db.Alunos.Add(obj);
+                db.Disciplinas.Add(obj);
                 db.SaveChanges();
             }
         }
-       
-        public Aluno Localizar()
+
+        public Disciplina Localizar()
         {
-            Aluno lista = null;
+            Disciplina lista = null;
             using (since2013bdEntities db = new since2013bdEntities())
             {
-                lista = (from u in db.Alunos
+                lista = (from u in db.Disciplinas
                          select u
-                         ).FirstOrDefault();    
+                         ).FirstOrDefault();
             }
             return lista;
         }
 
-        public List<Aluno> Localizar2(string nome)
+        public Disciplina Localizar2()
         {
-            List<Aluno> lista = null;
+            Disciplina model = null;
             using (since2013bdEntities db =
                 new since2013bdEntities())
             {
-                lista = (from al in db.Alunos
-                         where al.alu_nome.Contains(nome)
-                         orderby al.alu_nome
-                         select al
-                         ).ToList();
+                model = db.Disciplinas.Find();
             }
-            return lista;
+            return model;
         }
 
-
-        public void excluir(Aluno alu)
+        public void excluir(Disciplina disc)
         {
             using (since2013bdEntities db =
-                new since2013bdEntities())
+                new since2013bdEntities())  
             {
                 //alterar status para excluido
-                db.Entry(alu).State =
+                db.Entry(disc).State =
                     System.Data.Entity.EntityState.Deleted;
                 //salvar
                 db.SaveChanges();
             }
 
         }
-
-
     }
 }

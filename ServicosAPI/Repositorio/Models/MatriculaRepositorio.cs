@@ -5,63 +5,58 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Repositorio.Models
-{  
-    public class AlunoRepositorio
+{
+    public class MatriculaRepositorio
     {
+
         // private static List<Aluno> alunos = new List<Aluno>();
 
-        public void inserir(Aluno obj)
+        public void inserir(Matricula obj)
         {
             using (since2013bdEntities db =
                 new since2013bdEntities())
             {
-                db.Alunos.Add(obj);
+                db.Matriculas.Add(obj);
                 db.SaveChanges();
             }
         }
-       
-        public Aluno Localizar()
+
+        public Matricula Localizar()
         {
-            Aluno lista = null;
+            Matricula lista = null;
             using (since2013bdEntities db = new since2013bdEntities())
             {
-                lista = (from u in db.Alunos
+                lista = (from u in db.Matriculas
                          select u
-                         ).FirstOrDefault();    
+                         ).FirstOrDefault();
             }
             return lista;
         }
 
-        public List<Aluno> Localizar2(string nome)
+        public Matricula Localizar2(int cod)
         {
-            List<Aluno> lista = null;
+            Matricula model = null;
             using (since2013bdEntities db =
                 new since2013bdEntities())
             {
-                lista = (from al in db.Alunos
-                         where al.alu_nome.Contains(nome)
-                         orderby al.alu_nome
-                         select al
-                         ).ToList();
+                model = db.Matriculas.Find(cod);
             }
-            return lista;
+            return model;
         }
 
 
-        public void excluir(Aluno alu)
+        public void excluir(Matricula mat)
         {
             using (since2013bdEntities db =
                 new since2013bdEntities())
             {
                 //alterar status para excluido
-                db.Entry(alu).State =
+                db.Entry(mat).State =
                     System.Data.Entity.EntityState.Deleted;
                 //salvar
                 db.SaveChanges();
             }
 
         }
-
-
     }
 }

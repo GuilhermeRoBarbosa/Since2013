@@ -17,7 +17,7 @@ namespace Repositorio
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Disciplina()
         {
-            this.Alunoes = new HashSet<Aluno>();
+            this.Alunos = new HashSet<Aluno>();
             this.Matriculas = new HashSet<Matricula>();
         }
     
@@ -25,7 +25,7 @@ namespace Repositorio
         public string disc_nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Aluno> Alunoes { get; set; }
+        public virtual ICollection<Aluno> Alunos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matricula> Matriculas { get; set; }
     }

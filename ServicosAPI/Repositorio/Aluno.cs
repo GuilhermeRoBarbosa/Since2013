@@ -19,12 +19,7 @@ namespace Repositorio
         {
             this.Matriculas = new HashSet<Matricula>();
         }
-
-        public Aluno(string n)
-        {
-            this.Matriculas = new HashSet<Matricula>();
-        }
-
+    
         public int alu_cod { get; set; }
         public string alu_nome { get; set; }
         public string alu_RA { get; set; }

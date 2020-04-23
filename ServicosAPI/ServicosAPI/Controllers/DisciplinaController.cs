@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,35 +9,29 @@ using Repositorio.Models;
 using ServicosAPI.Mapper;
 using ServicosAPI.Models;
 
-
 namespace ServicosAPI.Controllers
 {
-    public class AlunosController : ApiController
+    public class DisciplinaController : ApiController
     {
         since2013bdEntities db = new since2013bdEntities();
-        
+
         //List<Aluno> lista = null;
 
-        public List<Aluno> Get()
+        public List<Disciplina> Get()
         {
-            var results = db.Alunos.ToList();
+            var results = db.Disciplinas.ToList();
             return results;
         }
-      
-        
 
-        public void Post(string nome, string ra, string telefone)
+        public void Post(string nome)
         {
-            Aluno obj = new Aluno();
+            Disciplina obj = new Disciplina();
+
+            obj.disc_nome = nome;
+           (new DisciplinaRepositorio()).inserir(obj);
 
 
 
-            obj.alu_nome = nome;
-            obj.alu_RA =ra;
-            obj.alu_telefone =telefone;
-
-            (new AlunoRepositorio()).inserir(obj);                 
-              
         }
 
 
@@ -61,18 +54,18 @@ namespace ServicosAPI.Controllers
 
         //DELETE: api/Alunos/5
 
-       
+
         public void Delete(string nome)
         {
 
 
-            Aluno obj = new Aluno();
+            Disciplina obj = new Disciplina();
 
-            obj.alu_nome = nome;
+            obj.disc_nome = nome;
 
             if (nome != "")
-            { 
-                (new AlunoRepositorio()).excluir(obj);
+            {
+                (new DisciplinaRepositorio()).excluir(obj);
             }
             //var results = db.Alunos.ToList();
             //results.RemoveAt(results.IndexOf(results.First(x => x.alu_nome.Equals(nome))));
